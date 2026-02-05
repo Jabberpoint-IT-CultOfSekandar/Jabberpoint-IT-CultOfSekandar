@@ -1,0 +1,29 @@
+name: Java CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v2
+    
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '25'
+
+    - name: Compile Java code
+      run: |
+        mkdir -p out  # Create output directory
+        javac -d out src/**/*.java  # Compile your Java files; update 'src/**/*.java' as necessary
+   
+    - name: Run Tests (if applicable)
+      run: |
+        java -cp out YourMainClass  # Replace YourMainClass with your main class name
